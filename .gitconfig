@@ -1,0 +1,6 @@
+[user]
+	email = gulakov@ispras.ru
+	name = Ivan Gulakov
+[core]
+	editor = vim
+	excludesfile = ~/.gitglobalignore
