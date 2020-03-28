@@ -99,4 +99,4 @@ export ARCHFLAGS="-arch x86_64"
 
 alias l='ls -lhHig'
 alias ll='ls -lhHiag'
-
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
