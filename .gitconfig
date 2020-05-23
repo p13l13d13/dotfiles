@@ -9,3 +9,11 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = "code --wait "
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = "code --wait --diff  "

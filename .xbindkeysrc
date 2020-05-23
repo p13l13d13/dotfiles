@@ -1,0 +1,7 @@
+#Pagedown press
+"xte 'keydown Control_L'"
+b:8
+
+#Pagedown release
+"xte 'keyup Control_L'"
+b:8 + Release
