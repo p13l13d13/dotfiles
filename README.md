@@ -1,27 +1,11 @@
-### Way to setup 
+### How to setup 
 
-    '''
-    git init --bare $HOME/.dotfiles
-    alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-    config config status.showUntrackedFiles no
-    '''
+    ```bash 
+	./link.sh
+    ```
 
-### Update workflow
+    That's it :)
 
-'''
-    config status
-    config add .vimrc
-    config commit -m "Add vimrc"
-    config add .config/redshift.conf
-    config commit -m "Add redshift config"
-    config push
-'''
+### Content
 
-### Load on a new machine
-
-'''
-    git clone --separate-git-dir=$HOME/.dotfiles /path/to/repo $HOME/dotfilestmp
-    cp ~/dotfilestmp ~  
-    rm -r ~/dotfilestmp/
-    alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-'''
+That's my simple config for GNU/Linux. I'm mostly using Ubuntu/Arch with i3 and alacritty.
