@@ -1,10 +1,9 @@
-### How to setup 
+## How to setup
 
-    ```bash 
-	./link.sh
-    ```
-
-    That's it :)
+```bash 
+./link.sh
+```
+That's it :)
 
 ### Content
 
