@@ -4,16 +4,20 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitglobalignore
+	pager = delta
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
-[merge]
-	tool = vscode
-[mergetool "vscode"]
-	cmd = "code --wait "
-[diff]
-	tool = vscode
-[difftool "vscode"]
-	cmd = "code --wait --diff  "
+
+[pull]
+	rebase = false
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Monokai Extended
+
+[interactive]
+    diffFilter = delta --color-only

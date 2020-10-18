@@ -31,3 +31,6 @@ setxkbmap -option 'grp:alt_shift_toggle'
 xmodmap -e "keycode 134 = space"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+# Arch specific shit. There must be better way to handle this btw.
+export XDG_CONFIG_HOME="/home/gulakov/.config"
+LC_ALL=en_US.UTF-8

@@ -1,8 +1,44 @@
 call plug#begin('~/.vim/plugged')
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Basic support for a variety of languages
+Plug 'sheerun/vim-polyglot'
+
+" Navigate files easily
+Plug 'lokaltog/vim-easymotion'
+
+" Commenting
+Plug 'tpope/vim-commentary'
+
+" Git
+Plug 'tpope/vim-fugitive'
+
+" Session management
+Plug 'tpope/vim-obsession'
+
+" Fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Display diff symbols
+Plug 'mhinz/vim-signify'
+
+" FileTree navigator
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggleVCS' }
+
+" Automatically set cwd
+Plug 'airblade/vim-rooter'
+
 call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"                       General options
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+map <Leader> <Plug>(easymotion-prefix)
 
 set hidden
 
@@ -12,24 +48,83 @@ set nowritebackup
 " Give more space for displaying messages.
 set cmdheight=2
 
-
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
 
+" Horizontal splits opens below
+set splitbelow
+
+" Vertical splits open to the right
+set splitright
+
+" Number of visual spaces per TAB
+set tabstop=4
+
+" Number of spaces in tab when editing
+set softtabstop=4
+
+" Number of columns text is indented with when reindenting using << or >>
+set shiftwidth=4
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+" Don't highlight current line
+set nocursorline
+
+" Highlight matching [{()}]
+set showmatch
+
+" Use spaces instead of tabs
+set expandtab
+
+" Disable wrapping by default
+set nowrap
+
+" Open most folds by default
+set foldlevelstart=10
+
+" 10 nested fold max
+set foldnestmax=10
+
+" Fold based on indent level
+set foldmethod=indent
+
+" Disable swap files
+set noswapfile
+
+" No alarms and no surprises
+set noerrorbells visualbell t_vb=
+
+" Yank and paste with the system clipboard
+set clipboard=unnamed
+
+set wildignore+=node_modules/*,target/*
+
+" Make searches case insensitive
+set ignorecase
+
+" Override ignorecase option if search contains uppercase characters
+set smartcase
+
+" Increase the size of file history
+set viminfo='2000
 
 " Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
+" e file names as title of terminal while editing diagnostics appear/become resolved.
 if has("patch-8.1.1564")
 " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
-  endif
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"                                 COC
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -158,3 +253,51 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"                         General bindings
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" Easier movement between windows
+noremap <leader>wh <C-w>h
+noremap <leader>wj <C-w>j
+noremap <leader>wk <C-w>k
+noremap <leader>wl <C-w>l
+
+
+" Left and right can switch buffers
+nnoremap <left> :bp<cr>
+nnoremap <right> :bn<cr>
+
+
+" Fzf
+nnoremap <leader>? :Maps<cr>
+nnoremap <leader>ss :BLines<cr>
+nnoremap <leader>sS :Lines<cr>
+nnoremap <leader>Ts :Colors<cr>
+nnoremap <leader>pf :GFiles<cr>
+nnoremap <leader>pp :RG<cr>
+nnoremap <leader>tt :RG TODO<cr>
+nnoremap <leader>tf :RG FIXME<cr>
+nnoremap <leader>ff :Files ~/code<cr>
+
+" NERDTreeToggleVCS
+nnoremap <leader>pt :NERDTreeToggleVCS<cr>
+
+let g:rustfmt_autosave = 1
+
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>gr :Gread<cr>
+nnoremap <leader>gg :Git<space>
+
+" Always enable preview window on the right with 60% width
+let g:fzf_preview_window = 'right:60%'
+
+autocmd! FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+set lazyredraw
