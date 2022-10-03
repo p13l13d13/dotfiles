@@ -1,0 +1,11 @@
+[[language]]
+name = "rust"
+auto-format = false
+
+[[language]]
+name = "c"
+auto-format = false
+
+[[language]]
+name = "cpp"
+auto-format = false
