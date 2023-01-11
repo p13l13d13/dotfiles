@@ -1,4 +1,4 @@
-theme = "grv"
+theme = "gruvbox"
 
 [editor]
 line-number = "relative"
@@ -18,6 +18,9 @@ hidden = false
 render = true
 
 [editor.statusline]
-left = ["mode", "file-name"]
+left = ["mode", "file-name", "spinner"]
 center = []
 right = ["diagnostics", "selections", "position-percentage"]
+
+[editor.lsp]
+display-messages = true
