@@ -41,7 +41,7 @@ let mapleader = ","
 map <Leader> <Plug>(easymotion-prefix)
 
 set hidden
-
+set hlsearch
 set nobackup
 set nowritebackup
 
@@ -96,6 +96,9 @@ set noswapfile
 
 " No alarms and no surprises
 set noerrorbells visualbell t_vb=
+
+" Search as you type
+set incsearch
 
 " Yank and paste with the system clipboard
 set clipboard=unnamed

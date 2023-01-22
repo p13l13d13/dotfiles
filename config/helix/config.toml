@@ -1,9 +1,9 @@
-theme = "gruvbox"
+theme = "autumn"
 
 [editor]
 line-number = "relative"
 mouse = false
-cursorline = true
+auto-pairs = false
 color-modes = true
 
 [editor.cursor-shape]
@@ -11,16 +11,16 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
-[editor.file-picker]
-hidden = false
-
 [editor.indent-guides]
 render = true
 
-[editor.statusline]
-left = ["mode", "file-name", "spinner"]
-center = []
-right = ["diagnostics", "selections", "position-percentage"]
+[editor.file-picker]
+hidden = false # Don't ignore hidden files
+git-ignore = false # Don't read gitignore files
+ignore = false # Don't read .ignore files
 
-[editor.lsp]
-display-messages = true
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "file-encoding", "file-type", "position-percentage"]
+separator = "│"

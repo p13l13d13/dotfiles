@@ -9,16 +9,3 @@ auto-format = false
 [[language]]
 name = "cpp"
 auto-format = false
-
-[[language]]
-name = "python"
-auto-format = false
-
-
-[[language]]
-name = "bash"
-auto-format = false
-
-[[language]]
-name = "typescript"
-auto-format = false
