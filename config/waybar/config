@@ -1,0 +1,73 @@
+// -*- mode: jsonc -*-
+{
+    "height": 32, // Waybar height (to be removed for auto height)
+    "spacing": 1, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+        "custom/potato",
+        "pulseaudio",
+        "hyprland/language",
+        "network",
+        "clock",
+        "tray",
+    ],
+   	"hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "all-outputs": true,
+		},
+    "custom/potato": {
+      "on-click-middle": "potctl -r",
+      "on-click-right": "potctl -p",
+      "on-click": "potctl -s",
+      "exec": "potd -fN"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    	"clock": {
+		"format": "{:%I:%M %p}",
+        "timezone": "Europe/Berlin",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+				"today": "<span color='#ffcc66'><b><u>{}</u></b></span>"
+			}
+		}
+	},
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "󰈀",
+        "tooltip-format": "{ifname} via {gwaddr} 󰈁",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected 󰈂",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+}
