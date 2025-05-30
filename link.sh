@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e # Fail early. I'm not using traps here, because it should managable (the script is ez)
-mkdir -p $HOME/config/i3
 mkdir -p $HOME/config/alacritty
 mkdir -p $HOME/config/wallpaper
 mkdir -p $HOME/config/sway
