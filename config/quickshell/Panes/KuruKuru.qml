@@ -2,6 +2,9 @@ import QtQuick
 import QtQuick.Particles
 import QtQuick.Layouts
 import QtQuick.Effects
+import Quickshell
+import QtMultimedia 5.15
+import Quickshell.Io
 
 import "../Data/" as Dat
 import "../Widgets/" as Wid
@@ -47,9 +50,10 @@ Rectangle {
 
           Layout.fillHeight: true
           Layout.fillWidth: true
+          wrapMode: Text.WordWrap
           color: Dat.Colors.on_surface
           horizontalAlignment: Text.AlignLeft
-          text: "くるくる～――っと。"
+          text: "That woman deserves her revenge and we deserve to die"
           verticalAlignment: Text.AlignVCenter
         }
       }
@@ -68,6 +72,7 @@ Rectangle {
       Layout.fillHeight: true
       Layout.fillWidth: true
       Layout.preferredWidth: 1
+
 
       Rectangle { // the hando that squishes the kuru kuru
         id: squishRect
@@ -117,11 +122,12 @@ Rectangle {
         ]
       }
 
+
       Rectangle {
         id: gifRect
 
         property bool playing: false
-        property real speed: 0.8
+        property real speed: 0.4
         property bool switchable: true
 
         Layout.fillHeight: true
@@ -243,7 +249,11 @@ Rectangle {
           repeat: true
           running: squishRect.state == "SQUISH"
 
-          onTriggered: parent.speed += 0.1
+          onTriggered: {
+            if (parent.speed < 5) {
+              parent.speed += 0.07
+            }
+          }
         }
 
         Timer {
@@ -253,7 +263,7 @@ Rectangle {
           repeat: true
           running: squishRect.state != "SQUISH" && parent.speed > 0.8
 
-          onTriggered: parent.speed -= 0.05
+          onTriggered: parent.speed -= 0.03
         }
 
         AnimatedImage {
@@ -264,7 +274,7 @@ Rectangle {
           fillMode: Image.PreserveAspectCrop
           horizontalAlignment: Image.AlignRight
           playing: parent.playing && smoll.visible
-          source: "https://duiqt.github.io/herta_kuru/static/img/hertaa1.gif"
+          source: Quickshell.env("HOME") + "/.config/quickshell/trump1.gif"
           speed: parent.speed
         }
 
@@ -276,13 +286,23 @@ Rectangle {
           fillMode: Image.PreserveAspectFit
           horizontalAlignment: Image.AlignRight
           playing: parent.playing && big.visible
-          source: "https://media.tenor.com/taxnt3zsc_4AAAAj/seseren-the-herta.gif"
+          source: Quickshell.env("HOME") + "/.config/quickshell/trump1.gif"
           speed: parent.speed
         }
 
         MouseArea {
           acceptedButtons: Qt.LeftButton
           anchors.fill: parent
+          property var audio_playing: false
+          readonly property var process: Process {
+              command: ["sh", "-c", "ffplay -nodisp -autoexit $HOME/.config/quickshell/trump1.mp4"]
+          }
+
+          // Audio {
+          //   id: trumpSound
+          //   source: Quickshell.env("HOME") + "/.config/quickshell/trump.mp4"
+          //   volume: 0.5
+          // }
 
           onPressedChanged: {
             squishRect.state = (squishRect.state == "SQUISH") ? "NOSQUISH" : "SQUISH";
@@ -290,13 +310,12 @@ Rectangle {
             if (muteIcon.muted) {
               return;
             }
-            if (Math.round((Math.random() * 10)) % 2 == 0) {
-              // kurukuru.play();
-              kuruText.text = "くるくる～――っと。";
-            } else {
-              // kururin.play();
-              kuruText.text = "くるりん～っと。";
+            if (!audio_playing) {
+              audio_playing = true
+              process.startDetached();
             }
+
+            kuruText.text = "We Are So Back!";
           }
         }
       }

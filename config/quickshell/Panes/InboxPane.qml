@@ -41,11 +41,11 @@ Rectangle {
           }
         }
         addDisplaced: Transition {
-          NumberAnimation {
-            duration: Dat.MaterialEasing.standardTime
-            easing.bezierCurve: Dat.MaterialEasing.standard
-            properties: "x,y"
-          }
+            NumberAnimation {
+              duration: 1000 / Screen.refreshRate
+              easing.bezierCurve: Dat.MaterialEasing.standardDecel
+              properties: "x,y"
+            }
         }
         delegate: Gen.Notification {
           required property Notification modelData

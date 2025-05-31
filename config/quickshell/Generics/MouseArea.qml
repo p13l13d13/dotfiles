@@ -8,7 +8,7 @@ MouseArea {
   property real hoverOpacity: 0.08
   property color layerColor: "white"
   property NumberAnimation layerOpacityAnimation: NumberAnimation {
-    duration: Dat.MaterialEasing.standardTime
+    duration: 1000 / Screen.refreshRate
     easing.bezierCurve: Dat.MaterialEasing.standard
   }
   property int layerRadius: parent?.radius ?? 0

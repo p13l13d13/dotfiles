@@ -23,7 +23,7 @@ RowLayout {
       anchors.centerIn: parent
       height: this.width
       mipmap: true
-      source: Quickshell.env("HOME") + "/.face.icon"
+      source: Quickshell.env("HOME") + "/.config/quickshell/killbill.jpg"
       visible: false
       width: 90
     }

@@ -58,14 +58,13 @@ Rectangle {
 
         ParallelAnimation {
           NumberAnimation {
-            duration: Dat.MaterialEasing.standardTime
+            duration: 1000 / Screen.refreshRate
             easing.bezierCurve: Dat.MaterialEasing.standard
             properties: "width, opacity"
-            target: bgToggle
           }
 
           ColorAnimation {
-            duration: Dat.MaterialEasing.standardTime
+            duration: 1000 / Screen.refreshRate
             targets: [bgToggle, matIcon]
           }
         }
@@ -78,14 +77,13 @@ Rectangle {
       SequentialAnimation {
         ParallelAnimation {
           NumberAnimation {
-            duration: Dat.MaterialEasing.standardTime
+            duration: 1000 / Screen.refreshRate
             easing.bezierCurve: Dat.MaterialEasing.standard
             properties: "width, opacity"
-            target: bgToggle
           }
 
           ColorAnimation {
-            duration: Dat.MaterialEasing.standardTime
+            duration: 1000 / Screen.refreshRate
             targets: [bgToggle, matIcon]
           }
         }

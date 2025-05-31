@@ -89,12 +89,6 @@ RowLayout {
         implicitHeight: 20
         radius: 20
       }
-
-      Wid.BrightnessDot {
-        implicitHeight: 20
-        implicitWidth: 20
-        radius: 20
-      }
-    }
+   }
   }
 }

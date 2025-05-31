@@ -23,7 +23,7 @@ Text {
 
   Behavior on fill {
     NumberAnimation {
-      duration: Dat.MaterialEasing.standardTime
+      duration: 1000 / Screen.refreshRate
       easing.bezierCurve: Dat.MaterialEasing.standard
     }
   }

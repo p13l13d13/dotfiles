@@ -55,7 +55,7 @@ Scope {
 
         Behavior on color {
           ColorAnimation {
-            duration: Dat.MaterialEasing.standardTime
+            duration: 1000 / Screen.refreshRate
           }
         }
         states: [
@@ -117,7 +117,7 @@ Scope {
 
               ParallelAnimation {
                 NumberAnimation {
-                  duration: Dat.MaterialEasing.standardTime * 2
+                  duration: (1000 / Screen.refreshRate) * 2
                   easing.bezierCurve: Dat.MaterialEasing.standard
                   property: "opacity"
                   target: topBar
@@ -197,10 +197,9 @@ Scope {
                 }
 
                 NumberAnimation {
-                  duration: Dat.MaterialEasing.standardTime * 3
+                  duration: (1000 / Screen.refreshRate) * 3
                   easing.bezierCurve: Dat.MaterialEasing.standard
                   property: "opacity"
-                  target: expandedPane
                 }
               }
             }
@@ -212,17 +211,15 @@ Scope {
             SequentialAnimation {
               ParallelAnimation {
                 NumberAnimation {
-                  duration: Dat.MaterialEasing.standardTime
+                  duration: 1000 / Screen.refreshRate
                   easing.bezierCurve: Dat.MaterialEasing.standard
                   property: "height"
-                  target: notchRect
                 }
 
                 NumberAnimation {
-                  duration: Dat.MaterialEasing.standardTime
+                  duration: 1000 / Screen.refreshRate
                   easing.bezierCurve: Dat.MaterialEasing.standard
                   property: "opacity"
-                  target: expandedPane
                 }
               }
 
