@@ -9,6 +9,7 @@ mkdir -p $HOME/config/quickshell
 
 ln -sf $(pwd)/config/quickshell $HOME/.config/quickshell
 ln -sf $(pwd)/config/hypr $HOME/.config/hypr
+ln -sf $(pwd)/config/waybar $HOME/.config/waybar
 ln -sf $(pwd)/config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml  
 ln -sf $(pwd)/config/helix/config.toml $HOME/.config/helix/config.toml 
 ln -sf $(pwd)/config/helix/languages.toml $HOME/.config/helix/languages.toml
