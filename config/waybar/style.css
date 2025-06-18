@@ -1,5 +1,5 @@
 @define-color foreground #eeeeee;
-@define-color foreground-inactive #aaaaaa;
+@define-color foreground-inactive #555555;
 @define-color background #000000;
 
 * {
@@ -8,6 +8,32 @@
     min-height: 0;
     padding: 0;
     margin: 0;
+}
+
+#workspaces {
+    margin-right: 8px;
+    transition: none;
+}
+
+#workspaces button {
+    transition: none;
+    color: @foreground-inactive;
+    background: @background;
+    font-size: 14px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    transition: none;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    border-radius: 6px;
+    color: #383c4a;
+    background: #7c818c;
+}
+
+#workspaces button.active {
+    color: @foreground;
 }
 
 #waybar {
