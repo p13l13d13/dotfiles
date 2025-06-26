@@ -6,14 +6,21 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["privacy", "systemd-failed-units", "wireplumber", "battery", "hyprland/language", "network", "bluetooth", "tray"],
+    "modules-right": ["privacy", "systemd-failed-units", "custom/weather", "wireplumber", "battery", "hyprland/language", "network", "bluetooth", "tray"],
     
     "hyprland/workspaces": {
         "disable-scroll": true,
         "on-click": "activate",
         "sort-by-number": true,
     },
-
+    "custom/weather": {
+        "exec": "~/.config/waybar/scripts/weather.sh",
+        "interval": 1800, // Update every 30 minutes (in seconds)
+        "return-type": "json",
+        "on-click-right": "waybar-right-click-uv",
+        "format": "{}",
+        "tooltip": true
+    },
     "clock": {
         "format": "{:%d.%m | %H:%M}",
         "on-click": "gnome-calendar"

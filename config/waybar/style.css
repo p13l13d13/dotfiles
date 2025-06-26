@@ -41,6 +41,10 @@
     background-color: @background;
 }
 
+#custom-weather {
+    padding-right: 0.5em;
+}
+
 #wireplumber,
 #battery,
 #backlight,
