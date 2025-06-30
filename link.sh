@@ -20,4 +20,3 @@ for dir in "${config_dirs[@]}"; do
 done
 
 ln -sfn -t "$HOME" "$repo_dir"/dotfiles/.[!.]* "$repo_dir"/dotfiles/..?*
-
