@@ -6,7 +6,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["privacy", "systemd-failed-units", "custom/weather", "wireplumber", "battery", "hyprland/language", "network", "bluetooth", "tray"],
+    "modules-right": ["privacy", "custom/weather", "wireplumber", "battery", "hyprland/language", "network", "bluetooth", "tray"],
     
     "hyprland/workspaces": {
         "disable-scroll": true,

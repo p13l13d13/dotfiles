@@ -1,0 +1,4 @@
+- Add TDP setting to the waybar
+- Add power-saving widget to waybar
+- Add pomodoro timer to waybar
+- remove unused setting in hyprland
