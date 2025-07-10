@@ -19,4 +19,5 @@ for dir in "${config_dirs[@]}"; do
   ln -sfn "$repo_dir/config/$dir" "$HOME/.config/$dir"
 done
 
+ln -sfn "$repo_dir/config/fish/config.fish" "$HOME/.config/fish"
 ln -sfn -t "$HOME" "$repo_dir"/dotfiles/.[!.]* "$repo_dir"/dotfiles/..?*

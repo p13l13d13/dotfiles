@@ -12,16 +12,16 @@ configuration {
 	case-sensitive: false;
 	cycle: true;
 	filter: "";
-	scroll-method: 0;
+	lines: 10;
+	hide-scrollbar: true;
+	
 	normalize-match: true;
 	show-icons: true;
 	icon-theme: "Papirus";
-/*	cache-dir: ;*/
-	steal-focus: false;
-/*	dpi: -1;*/
+	steal-focus: true;
 
 	/*---------- Matching setting ----------*/
-	matching: "normal";
+	matching: "fuzzy";
 	tokenize: true;
 
 	/*---------- SSH settings ----------*/
@@ -82,8 +82,8 @@ configuration {
 	display-filebrowser: "Files";
 
 	/*---------- Misc setting ----------*/
-	terminal: "rofi-sensible-terminal";
-	font: "Mono 12";
+	terminal: "alacritty";
+	font: "Hack Nerd Font 20";
 	sort: false;
 	threads: 0;
 	click-to-exit: true;
