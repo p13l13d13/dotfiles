@@ -20,6 +20,44 @@ if status --is-interactive
     eval (keychain --quiet --timeout 2880 --eval $HOME/.ssh/id_ed25519)
 end
 
+function __fish_auto_venv --on-variable PWD
+    # 1. Walk upward from $PWD until / looking for .venv or venv
+    set -l dir $PWD
+    set -e __auto_new_venv
+    while test "$dir" != /
+        for candidate in .venv venv
+            if test -d "$dir/$candidate"
+                set -g __auto_new_venv "$dir/$candidate"
+                break
+            end
+        end
+        test -n "$__auto_new_venv"; and break
+        set dir (dirname $dir)
+    end
+
+    # 2. Decide whether to (de)activate
+    if test -n "$__auto_new_venv"
+        # Found a venv somewhere above
+        if not set -q VIRTUAL_ENV; or test "$VIRTUAL_ENV" != "$__auto_new_venv"
+            # Different venv (or none) -> switch
+            if functions -q deactivate; and set -q VIRTUAL_ENV
+                deactivate    # clean up current venv first
+            end
+            # Activate the new one.  Works for venv or virtualenv.
+            if test -f "$__auto_new_venv/bin/activate.fish"
+                source "$__auto_new_venv/bin/activate.fish"
+            else if test -f "$__auto_new_venv/bin/activate"
+                # fall back to POSIX activate if fish one is missing
+                source "$__auto_new_venv/bin/activate"
+            end
+        end
+    else
+        # No venv found → deactivate any active one
+        if functions -q deactivate; and set -q VIRTUAL_ENV
+            deactivate
+        end
+    end
+end
 # Autostart hyprland on login 
 if test -z "$DISPLAY" -a (tty) = "/dev/tty1"
     exec Hyprland

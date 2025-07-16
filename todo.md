@@ -2,3 +2,4 @@
 - Add power-saving widget to waybar
 - Add pomodoro timer to waybar
 - remove unused setting in hyprland
+- right click to sound widget should change sources
