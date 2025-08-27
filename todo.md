@@ -3,3 +3,9 @@
 - Add pomodoro timer to waybar
 - remove unused setting in hyprland
 - right click to sound widget should change sources
+- handle error and empty output in the weather widget
+- better notifications?
+- change notifications style
+- add kernel options to the configs
+- add systemd jobs to the configs
+- properly link init.lua
