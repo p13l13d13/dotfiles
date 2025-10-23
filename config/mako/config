@@ -1,0 +1,38 @@
+# Align mako with Hyprland/Waybar theme
+
+# General
+font=Hack 12
+anchor=top-right
+width=350
+height=120
+max-icon-size=48
+margin=10,10,10,10
+padding=10
+border-size=1
+border-radius=0
+default-timeout=5000
+max-visible=5
+history=1
+
+# Colors (Waybar: foreground #eeeeee, background #000000; Hyprland border active ~ #8ec07c)
+background-color=#282828
+text-color=#eeeeee
+border-color=#8ec07c
+
+[urgency=low]
+background-color=#282828
+text-color=#bbbbbb
+border-color=#3c3836
+
+[urgency=normal]
+background-color=#282828
+text-color=#eeeeee
+border-color=#8ec07c
+
+[urgency=high]
+background-color=#282828
+text-color=#ffffff
+# Alternative Hyprland accent seen in config comments: #fabd2f
+border-color=#fabd2f
+default-timeout=10000
+

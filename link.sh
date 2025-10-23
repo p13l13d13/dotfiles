@@ -16,7 +16,7 @@ config_dirs=(
 
 for dir in "${config_dirs[@]}"; do
   mkdir -p "$HOME/.config/$dir"
-  ln -sfn "$repo_dir/config/$dir" "$HOME/.config/$dir"
+  ln -sfn "$repo_dir/config/$dir/"* "$HOME/.config/$dir"
 done
 
 ln -sfn "$repo_dir/config/fish/config.fish" "$HOME/.config/fish"

@@ -2,11 +2,11 @@
     "layer": "top",
     "position": "top",
     "height": 20,
-    "spacing": 5,
+    "spacing": 3,
 
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["privacy", "custom/weather", "wireplumber", "battery", "hyprland/language", "network", "bluetooth", "tray"],
+    "modules-center": ["clock", "custom/pomodoro"],
+    "modules-right": ["privacy", "custom/weather", "group/mic_audio", "battery", "hyprland/language", "network", "bluetooth", "tray"],
     
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -21,21 +21,50 @@
         "format": "{}",
         "tooltip": true
     },
+    "custom/pomodoro": {
+        "exec": "~/.config/waybar/scripts/pomodoro.py",
+        "interval": 1,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/scripts/pomodoro.py toggle",
+        "on-click-right": "~/.config/waybar/scripts/pomodoro.py reset",
+        "on-scroll-up": "~/.config/waybar/scripts/pomodoro.py increase",
+        "on-scroll-down": "~/.config/waybar/scripts/pomodoro.py decrease",
+        "tooltip": true
+    },
     "clock": {
         "format": "{:%d.%m | %H:%M}",
         "on-click": "gnome-calendar"
     },
     "wireplumber": {
-        "format": "\udb81\udd7e  {volume}%",
+        "format": "{icon} {volume}%",
+        "format-icons": ["\uf026", "\uf027", "\uf028"],
         "max-volume": 100,
         "scroll-step": 5,
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "on-click-right": "~/.config/waybar/scripts/cycle_audio_outputs.sh",
+        "on-click-middle": "~/.config/waybar/scripts/cycle_audio_inputs.sh"
+    },
+
+    "group/mic_audio": {
+        "orientation": "horizontal",
+        "modules": ["custom/mic", "wireplumber"],
+        "spacing": 2
+    },
+
+    "custom/mic": {
+        "exec": "~/.config/waybar/scripts/mic_status.sh",
+        "interval": 2,
+        "return-type": "text",
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "~/.config/waybar/scripts/cycle_audio_inputs.sh"
     },
 
     "battery": {
         "bat": "BAT1",
         "interval": 60,
-        "format": "{icon}  {capacity}%",
+        "format": "{icon} {capacity}%",
         "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
     },
     "network": {

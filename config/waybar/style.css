@@ -5,7 +5,6 @@
 * {
     font-family: Hack;
     font-size: 14px;
-    min-height: 0;
     padding: 0;
     margin: 0;
 }
@@ -19,7 +18,6 @@
     transition: none;
     color: @foreground-inactive;
     background: @background;
-    font-size: 14px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -41,16 +39,44 @@
     background-color: @background;
 }
 
-#custom-weather {
-    padding-right: 0.5em;
-}
+/* Slightly smaller text everywhere */
+#waybar label { font-size: 13px; }
+/* Keep icons at original size when modules expose a separate .icon */
+#waybar .icon { font-size: 14px; }
 
-#wireplumber,
+#privacy,
+#group-mic_audio,
 #battery,
 #backlight,
 #language,
 #network,
 #bluetooth,
 #tray {
-    padding-right: 1em 
+    padding-right: 0.5em;
 }
+
+/* Increase space before language specifically; use !important to override runtime spacing */
+#language { margin-left: 5px; }
+
+/* Make the language widget slightly larger (text only) */
+#language { font-size: 14px; }
+
+/* Normalize mic widget look and spacing; ensure both icons fit without jitter */
+#custom-mic {
+    min-width: 14px; /* narrower block, keep icon size */
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 0.1em; /* tiny internal gap before volume */
+    font-family: "Symbols Nerd Font", "Nerd Font Symbols", "Font Awesome 6 Free", "Font Awesome 5 Free", Hack;
+    font-size: 14px;
+}
+
+#group-mic_audio #wireplumber { padding-right: 0; padding-left: 0; }
+
+/* (left padding not needed; controlled by margin-left above) */
+
+#custom-pomodoro { transition: color 0.2s ease; }
+#custom-pomodoro.work { color: #f4f4f4; }
+#custom-pomodoro.break { color: #c7c7c7; }
+#custom-pomodoro.paused { color: #b0b0b0; }
+#custom-pomodoro.stopped { color: #9a9a9a; }

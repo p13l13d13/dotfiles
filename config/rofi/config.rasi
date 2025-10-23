@@ -12,7 +12,7 @@ configuration {
 	case-sensitive: false;
 	cycle: true;
 	filter: "";
-	lines: 10;
+	lines: 5;
 	hide-scrollbar: true;
 	
 	normalize-match: true;
@@ -58,7 +58,7 @@ configuration {
 	/*---------- Window switcher settings ----------*/
 	window-match-fields: "title,class,role,name,desktop";
 	window-command: "wmctrl -i -R {window}";
-	window-format: "{w} - {c} - {t:0}";
+	window-format: "{w} {t:0}";
 	window-thumbnail: false;
 
 	/*---------- Combi settings ----------*/
@@ -68,8 +68,8 @@ configuration {
 
 	/*---------- History and Sorting ----------*/
 	disable-history: false;
-	sorting-method: "normal";
-	max-history-size: 25;
+	sorting-method: "fzf";
+	max-history-size: 100;
 
 	/*---------- Display setting ----------*/
 	display-window: "Windows";
@@ -83,7 +83,7 @@ configuration {
 
 	/*---------- Misc setting ----------*/
 	terminal: "alacritty";
-	font: "Hack Nerd Font 20";
+	font: "Hack Nerd Font 12";
 	sort: false;
 	threads: 0;
 	click-to-exit: true;
