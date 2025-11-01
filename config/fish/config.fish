@@ -58,7 +58,11 @@ function __fish_auto_venv --on-variable PWD
         end
     end
 end
+
 # Autostart hyprland on login 
-if test -z "$DISPLAY" -a (tty) = "/dev/tty1"
-    exec Hyprland
-end
+# if test -z "$DISPLAY" -a (tty) = "/dev/tty1"
+#     exec Hyprland
+# end
+
+# Created by `pipx` on 2025-10-02 09:24:51
+set PATH $PATH /home/gulakov/.local/bin
