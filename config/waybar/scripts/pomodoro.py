@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import subprocess
 import sys
 import time
 from copy import deepcopy
@@ -13,6 +14,8 @@ STATE_FILE = STATE_DIR / "waybar_pomodoro_state.json"
 WORK_DURATION = 30 * 60
 BREAK_DURATION = 5 * 60
 MIN_PHASE_DURATION = 60
+NOTIFICATION_TIMEOUT_MS = 7000
+FLASH_DURATION_SECONDS = 1.5
 
 DEFAULT_STATE = {
     "phase": "work",  # work, break
@@ -21,6 +24,7 @@ DEFAULT_STATE = {
     "elapsed": 0,
     "completed_cycles": 0,
     "phase_duration": WORK_DURATION,
+    "phase_changed_at": None,
 }
 
 
@@ -49,6 +53,11 @@ def load_state():
         duration = get_default_duration(merged["phase"])
     merged["phase_duration"] = max(MIN_PHASE_DURATION, int(duration))
     merged["elapsed"] = max(0, min(merged.get("elapsed", 0), merged["phase_duration"]))
+    changed_at = data.get("phase_changed_at")
+    if isinstance(changed_at, (int, float)) and changed_at > 0:
+        merged["phase_changed_at"] = float(changed_at)
+    else:
+        merged["phase_changed_at"] = None
     return merged
 
 
@@ -72,6 +81,7 @@ def get_phase_duration(state):
 
 
 def advance_phase(state, now):
+    previous_phase = state["phase"]
     if state["phase"] == "work":
         state["completed_cycles"] += 1
         state["phase"] = "break"
@@ -80,6 +90,7 @@ def advance_phase(state, now):
     state["phase_duration"] = get_default_duration(state["phase"])
     state["start_time"] = now
     state["elapsed"] = 0
+    return state["phase"] != previous_phase
 
 
 def toggle(state):
@@ -99,8 +110,25 @@ def toggle(state):
 
 
 def reset(state):
+    phase = state.get("phase")
+    if phase not in {"work", "break"}:
+        phase = DEFAULT_STATE["phase"]
+    duration = state.get("phase_duration")
+    if not isinstance(duration, (int, float)) or duration <= 0:
+        duration = get_default_duration(phase)
+    duration = max(MIN_PHASE_DURATION, int(duration))
     state.clear()
-    state.update(deepcopy(DEFAULT_STATE))
+    state.update(
+        {
+            "phase": phase,
+            "status": "stopped",
+            "start_time": None,
+            "elapsed": 0,
+            "completed_cycles": 0,
+            "phase_duration": duration,
+            "phase_changed_at": None,
+        }
+    )
 
 
 def adjust_duration(state, delta_seconds):
@@ -115,7 +143,8 @@ def adjust_duration(state, delta_seconds):
     if state["status"] == "running":
         state["start_time"] = now - state["elapsed"]
         if state["elapsed"] >= new_duration:
-            advance_phase(state, now)
+            if advance_phase(state, now):
+                apply_phase_change_effects(state)
 
 
 def format_time(seconds):
@@ -132,21 +161,72 @@ def phase_label(phase):
     return phase.replace("_", " ").title()
 
 
+def safe_run_command(command):
+    try:
+        result = subprocess.run(
+            command,
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return result.returncode == 0
+    except FileNotFoundError:
+        return False
+    except Exception:
+        return False
+
+
+def send_notification(phase):
+    title = "Pomodoro"
+    message = f"Time for {phase_label(phase)}"
+    safe_run_command(
+        [
+            "notify-send",
+            "--app-name=Pomodoro",
+            "-t",
+            str(NOTIFICATION_TIMEOUT_MS),
+            title,
+            message,
+        ]
+    )
+
+
+def play_sound():
+    if safe_run_command(["canberra-gtk-play", "--id", "message-new-instant"]):
+        return
+    safe_run_command(
+        ["paplay", "/usr/share/sounds/freedesktop/stereo/complete.oga"]
+    )
+
+
+def apply_phase_change_effects(state, event_time=None):
+    now = event_time or time.time()
+    state["phase_changed_at"] = now
+    send_notification(state["phase"])
+    play_sound()
+
+
 def update_running_state(state, now):
     if state["status"] != "running" or state["start_time"] is None:
         return
     duration = get_phase_duration(state)
     elapsed = now - state["start_time"]
+    phase_changed = False
     while elapsed >= duration:
-        advance_phase(state, now - (elapsed - duration))
+        phase_changed = (
+            advance_phase(state, now - (elapsed - duration)) or phase_changed
+        )
         duration = get_phase_duration(state)
         elapsed = now - state["start_time"]
     state["elapsed"] = max(0, elapsed)
+    if phase_changed:
+        apply_phase_change_effects(state, event_time=now)
 
 
-def output_state(state):
+def output_state(state, now=None):
     phase = state["phase"]
     duration = get_phase_duration(state)
+    now = now or time.time()
     if state["status"] == "running":
         remaining = duration - state["elapsed"]
     elif state["status"] == "paused":
@@ -166,6 +246,9 @@ def output_state(state):
         f"Duration: {format_time(duration)}",
     ]
     classes = [phase, state["status"]]
+    changed_at = state.get("phase_changed_at")
+    if isinstance(changed_at, (int, float)) and now - changed_at < FLASH_DURATION_SECONDS:
+        classes.append("phase-transition")
     print(
         json.dumps(
             {
@@ -195,7 +278,7 @@ def main():
     now = time.time()
     update_running_state(state, now)
     save_state(state)
-    output_state(state)
+    output_state(state, now=now)
 
 
 if __name__ == "__main__":
