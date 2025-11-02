@@ -13,7 +13,7 @@ STATE_FILE = STATE_DIR / "waybar_pomodoro_state.json"
 
 WORK_DURATION = 30 * 60
 BREAK_DURATION = 5 * 60
-MIN_PHASE_DURATION = 60
+MIN_PHASE_DURATION = 1
 NOTIFICATION_TIMEOUT_MS = 7000
 FLASH_DURATION_SECONDS = 1.5
 
@@ -148,7 +148,7 @@ def adjust_duration(state, delta_seconds):
 
 
 def format_time(seconds):
-    seconds = max(0, int(seconds))
+    seconds = max(0, round(seconds))
     minutes, secs = divmod(seconds, 60)
     return f"{minutes:02}:{secs:02}"
 

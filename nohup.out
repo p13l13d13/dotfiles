@@ -1,0 +1,24 @@
+
+(waybar:31824): Gtk-WARNING **: 23:02:52.746: Theme parsing error: gtk.css:6:11: 'max-width' is not a valid property name
+
+(waybar:31824): Gtk-WARNING **: 23:02:52.746: Theme parsing error: gtk.css:6:28: 'max-height' is not a valid property name
+[2025-11-01 23:02:52.781] [info] Using configuration file /home/gulakov/.config/waybar/config
+[2025-11-01 23:02:52.787] [info] Discovered appearance 'dark'
+[2025-11-01 23:02:52.822] [info] Using CSS file /home/gulakov/.config/waybar/style.css
+[2025-11-01 23:02:52.833] [info] Hyprland IPC starting
+[2025-11-01 23:02:52.834] [info] Loading persistent workspaces from Hyprland workspace rules
+[2025-11-01 23:02:52.903] [warning] Requested height: 20 is less than the minimum height: 26 required by the modules
+[2025-11-01 23:02:52.903] [info] Bar configured (width: 1410, height: 26) for output: eDP-1
+[2025-11-01 23:02:52.903] [error] Item '': No icon name or pixmap given.
+[2025-11-01 23:02:52.977] [error] Item '': No icon name or pixmap given.
+
+(waybar:72198): Gtk-WARNING **: 00:01:42.133: Theme parsing error: gtk.css:6:11: 'max-width' is not a valid property name
+
+(waybar:72198): Gtk-WARNING **: 00:01:42.133: Theme parsing error: gtk.css:6:28: 'max-height' is not a valid property name
+[2025-11-02 00:01:42.170] [info] Using configuration file /home/gulakov/.config/waybar/config
+[2025-11-02 00:01:42.175] [info] Discovered appearance 'dark'
+[2025-11-02 00:01:42.209] [info] Using CSS file /home/gulakov/.config/waybar/style.css
+[2025-11-02 00:01:42.219] [info] Hyprland IPC starting
+[2025-11-02 00:01:42.220] [info] Loading persistent workspaces from Hyprland workspace rules
+[2025-11-02 00:01:42.293] [warning] Requested height: 20 is less than the minimum height: 26 required by the modules
+[2025-11-02 00:01:42.293] [info] Bar configured (width: 1410, height: 26) for output: eDP-1
