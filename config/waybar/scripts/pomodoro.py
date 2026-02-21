@@ -14,8 +14,8 @@ STATE_FILE = STATE_DIR / "waybar_pomodoro_state.json"
 WORK_DURATION = 30 * 60
 BREAK_DURATION = 5 * 60
 MIN_PHASE_DURATION = 1
-NOTIFICATION_TIMEOUT_MS = 7000
-FLASH_DURATION_SECONDS = 1.5
+NOTIFICATION_TIMEOUT_MS = 5000
+FLASH_DURATION_SECONDS = 1.0
 
 DEFAULT_STATE = {
     "phase": "work",  # work, break
@@ -260,6 +260,14 @@ def output_state(state, now=None):
     )
 
 
+def toggle_phase(state):
+    if state["phase"] == "work":
+        state["phase"] = "break"
+    else:
+        state["phase"] = "work"
+    reset(state)
+
+
 def main():
     state = load_state()
     if len(sys.argv) > 1:
@@ -268,6 +276,8 @@ def main():
             toggle(state)
         elif command == "reset":
             reset(state)
+        elif command == "toggle_phase":
+            toggle_phase(state)
         elif command == "increase":
             adjust_duration(state, 5 * 60)
         elif command == "decrease":
