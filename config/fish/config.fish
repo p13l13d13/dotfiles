@@ -14,12 +14,6 @@ set theme_color_scheme "gruvbox"
 set -x BOTHOST 91.99.204.42
 zoxide init fish | source
 
-if status --is-interactive
-    # On first login after boot, starts ssh-agent and prompts once for your passphrase.
-    # On subsequent shells, it simply reuses the already-running agent.
-    eval (keychain --quiet --timeout 2880 --eval $HOME/.ssh/id_ed25519)
-end
-
 function __fish_auto_venv --on-variable PWD
     # 1. Walk upward from $PWD until / looking for .venv or venv
     set -l dir $PWD
